@@ -1,0 +1,85 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication1;
+
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class JavaApplication1 {
+
+    static Scanner scan;
+
+    public static void main(String[] args) {
+
+        scan = new Scanner(System.in);
+        int op = 0;
+        String preEscolha;
+
+        do {
+
+            try {
+
+                    do {
+                        System.out.print("Entre com a quantidade de termos: ");
+                        preEscolha = scan.next();
+                        op = Integer.parseInt(preEscolha);
+                        if(op < 1)
+                                System.err.println("\n-Erro! Valor inválido.\n");
+                    }while(op < 1);
+                    
+                    int[] qntTermos = new int[op];
+                    
+                    for(int i = 0; i < qntTermos.length; i++){
+                        do {
+                            System.out.print("Entre com o " + (i + 1) + "º número: ");
+                            preEscolha = scan.next();
+                            qntTermos[i] = Integer.parseInt(preEscolha);
+                            if(op < 1)
+                                System.err.println("\n-Erro! Valor inválido.\n");
+                        }while(op < 1);
+                    }
+                    
+                    isNumPerfect(qntTermos);
+                    
+                    //menu para sair
+                    op = 0;
+                    System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
+                    preEscolha = scan.next();
+                    op = Integer.parseInt(preEscolha);
+
+            }catch(Exception e){}
+        }while(op != 1);
+
+        System.out.print("Fim!");
+        scan.close();
+    }
+    
+    static void isNumPerfect(int[] valor) {
+        int testPerfect = 0;
+        int[] perfctFind = new int[valor.length];
+
+        for(int i = 0; i < valor.length; i++){
+            
+            if(valor[i] % 2 == 0){
+                testPerfect = 0;
+                //System.out.println("Entrou");
+                for(int x = 1; x <= valor[i] / 2; x++) {
+                    if(valor[i] % x == 0)
+                        testPerfect += x;
+                }
+            }
+            
+            if(valor[i] == testPerfect)
+                perfctFind[i] = valor[i];
+            
+        }
+        for(int i = 0; i < valor.length; i++){
+            if(perfctFind[i] != 0)
+                System.out.print((i == 0) ? "\n>> " + perfctFind[i] + " " : perfctFind[i] + " ");
+        }
+    }  
+}
