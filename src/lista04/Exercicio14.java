@@ -44,14 +44,27 @@ public class Exercicio14 {
 	static int invertNum(int valor) {
 	    int invertido = 0;
 	    
-	    while (valor > 0) {
+	    if(valor > 0) 
+	    	invertido = inverter(valor);
+	    else {
+	    	valor *= -1;
+	    	invertido = inverter(valor);
+	    	invertido *= (-1);
+	    }
+	    return invertido;
+	}
+	
+	static int inverter(int valor) {
+		int invertido = 0;	    
+	    
+    	while (valor > 0) {
 	        int digito = valor % 10;
 	        invertido = invertido * 10 + digito;
 	        valor /= 10;
 	    }
-	    return invertido;
+		return invertido;
 	}
-
+	
 	
             
 }
