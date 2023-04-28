@@ -51,7 +51,6 @@ public class Exercicio9 {
 	static int calculoMMC(int[] valores) {
 		
 		int mmcMin = 2, mmc = 1, cont = 0;//se cont for maior que 1, entao o mmcMin é multiplicado
-		boolean trueMmc = true;
 		
 		while(valores[0] > 1 || valores[1] > 1) {
 			cont = 0;//reseta o valor de cont para um novo teste

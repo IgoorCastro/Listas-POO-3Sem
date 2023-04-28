@@ -1,3 +1,10 @@
+/*
+[POO-026] ===Desafio!!!=== Crie um programa que solicite ao usuário um número inteiro, que
+representará a quantidade de números inteiros que serão digitados em seguida e armazenados em um
+array. Através de um método que receba esse array de números inteiros como parâmetro de entrada. Este
+método deverá retornar, apenas, os números perfeitos existentes no conjunto recebido.
+Igor Kaue Nardes de Castro
+ */
 package lista04;
 
 import java.util.Scanner;

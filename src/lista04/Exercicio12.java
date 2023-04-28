@@ -1,3 +1,8 @@
+/*
+[POO-025] Crie um programa que solicite ao usuário um número inteiro. Utilizando métodos, exiba a
+sequência dos números perfeito até o número informado.
+Igor Kaue Nardes de Castro
+ */
 package lista04;
 
 import java.util.Scanner;
@@ -9,7 +14,7 @@ public class Exercicio12 {
 	public static void main(String[] args) {
 
 		scan = new Scanner(System.in);
-		int op = 0, numPerfects[] = new int[10];
+		int op = 0;
 		String preEscolha;
 		
 		do {

@@ -1,3 +1,9 @@
+/*
+[POO-024] Crie um programa que solicite ao usuário um número inteiro. Através de um método que
+receba esse número inteiro como parâmetro de entrada, verifique e retorne um valor boolean, que
+indicará, caso true que ele é um número perfeito, caso false, que não é.
+ Igor Kaue Nardes de Castro
+ */
 package lista04;
 
 import java.util.Scanner;
