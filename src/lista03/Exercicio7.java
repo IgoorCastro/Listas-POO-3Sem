@@ -1,54 +1,79 @@
 /*
-[POO-012] Crie um programa que pergunte ao usuário se ele deseja lançar/jogar um dado. Por meio de
-um método chamado dado(), retorne, através de sorteio aleatório, um número de 1 até 6. O programa
-deve ser executado enquanto o usuário quiser continuar jogando o dado.
+[POO-020] Crie um programa que solicite ao usuário dois números inteiros. Através de um método que
+receba esses dois números inteiros como parâmetro de entrada, calcule e retorne o MDC (Máximo Divisor
+Comum) destes números fornecidos.
 Igor Kaue Nardes de Castro
  */
+
 package lista03;
 
 import java.util.Scanner;
-//import java.util.Random;
 
 public class Exercicio7 {
 
-    static Scanner scan;
+	static Scanner scan;
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        scan = new Scanner(System.in);
-        int opExit = 0;
-        String preEscolha;
-        char opJogar;
+		scan = new Scanner(System.in);
+		int op = 0;
+		int[] valores = new int[2];
+		String preEscolha;
+		
+		do {
+			
+			try {
+				
+				System.out.print("Digite o primeiro valor: ");
+				preEscolha = scan.next();
+				valores[0] = Integer.parseInt(preEscolha);
+				
+				System.out.print("Digite o primeiro valor: ");
+				preEscolha = scan.next();
+				valores[1] = Integer.parseInt(preEscolha);
+				
+				System.out.println();
+				
+				System.out.print("MDC: " + calculoMDC(valores));
+				
+				//menu para sair
+				System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
+				preEscolha = scan.next();
+				op = Integer.parseInt(preEscolha);
+				
+			}catch(Exception e){}
+			
+		}while(op != 1);
+		
+		System.out.print("Fim!");
+		scan.close();
+	}
+	
+	static int calculoMDC(int[] valores) {
+		
+		int mdcMin = 2, mdc = 1;
+		boolean trueMdc = true;
+		
+		while(valores[0] > 1 && valores[1] > 1) {
+			trueMdc = true;
+			
+			if(valores[0] % mdcMin != 0) {
+				trueMdc = false;
+			}else {
+				valores[0] /= mdcMin;
+			}
+			
+			if(valores[1] % mdcMin != 0) {
+				trueMdc = false;
+			}else {
+				valores[1] /= mdcMin;
+			}
+			if(!trueMdc)
+				mdcMin++;
+			else
+				mdc *= mdcMin;
+		}
+		return mdc;
+	}
 
-        do {
-
-            try {
-
-                System.out.println("-Jogue o dado");                                
-                
-                do{
-                    System.out.print("\nJogar o dado[s/n]: ");
-                    preEscolha = scan.next();
-                    opJogar = preEscolha.charAt(0);                
-                    System.out.print((opJogar == 's') ? "Saiu: " + dado() : "");
-                }while(opJogar == 's');
-                
-                //menu para sair
-                System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
-                preEscolha = scan.next();
-                opExit = Integer.parseInt(preEscolha);
-
-            }catch(Exception e){System.out.println("\nerro: " + e);}
-
-        }while(opExit != 1);
-
-        System.out.print("Fim!");
-        scan.close();
-    }        
-    
-    static int dado(){
-        
-        return (int) (Math.random() * 100);
-    }
-    
 }

@@ -1,70 +1,49 @@
 /*
-1) Escreva um programa em Java para ler uma matriz A de 4 linhas por 5 colunas e
-imprimir seus elementos.
-Igor Kaue Nardes de Castro - 3° ADS
- */
+[POO-001] Crie programa que solicite ao usuário um número tipo double. Após verifique se o número é
+positivo ou não. A verificação deve ser feita através de um método que receba um valor (parâmetro de
+entrada) e informe se ele é positivo ou negativo através de um retorno do tipo boolean. Assuma o número
+zero como positivo. Declare como: boolean isPositivo ( double num ).
+Igor Kaue Nardes de Castro 
+*/
 
 package lista01;
-import java.util.Random;
+
 import java.util.Scanner;
 
 public class Exercicio01 {
 
-	public static void main(String[] args) {
-		
-		Scanner scan = new Scanner(System.in);
-		int a[][] = new int[4][5];
-		int op = 0;
-		
-		do {
-			
-			try {
-				
-				a = gerarMatriz(4, 5);
-				lerMatriz(a);
-				
-				System.out.printf("\nDigite '1' para sair ou outro valor para gerar outra Matriz: ");
-				String preEscolha = scan.next();
-				op = Integer.parseInt(preEscolha);
-				
-			}catch(Exception e){} 
-			System.out.println();
-			
-		}while(op != 1);
-		
-		System.out.printf("Fim!");
-		scan.close();
-		
-	}
-	
-	static int[][] gerarMatriz(int lin, int col) {
-		
-		Random rnd = new Random();
-		int mtz[][] = new int[lin][col];
-				
-		for(int h = 0; h < 4; h++) 			
-			for(int j = 0; j < 5; j++) 				
-				mtz[h][j] = rnd.nextInt(100);
-		
-		return mtz;
-	}
-	
-	static void lerMatriz(int[][] mtz){
-		
-		for(int h = 0; h < 4; h++) {
-			
-			for(int j = 0; j < 5; j++) {
+	static Scanner scan;
 
-				if(j == 0)
-					System.out.print(mtz[h][j]);
-				System.out.printf("\t" + mtz[h][j]);
-				
-			}
-			
-			System.out.println();
-			
-		}
-		
-	}
+    public static void main(String[] args) {
+
+        scan = new Scanner(System.in);
+        int op = 0;        
+        String preEscolha;
+
+        do {
+
+            try {
+
+                System.out.print("Digite um valor para verificar: ");
+                preEscolha =scan.next();
+                //double valEscolhido = Double.parseDouble(preEscolha);
+                System.out.println(isPositivo(Double.parseDouble(preEscolha)) ? "Valor positivo!" : "Valor negativo!");
+
+                //menu para sair
+                System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
+                preEscolha = scan.next();
+                op = Integer.parseInt(preEscolha);
+
+            }catch(Exception e){System.err.print(e);}
+
+        }while(op != 1);
+
+        System.out.print("Fim!");
+        scan.close();
+    }   
+   
+    static boolean isPositivo(double num) {    	
+    	return (num < 0) ? false : true;
+    }
 
 }

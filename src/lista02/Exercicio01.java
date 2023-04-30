@@ -1,49 +1,53 @@
 /*
-[POO-001] Crie programa que solicite ao usuário um número tipo double. Após verifique se o número é
-positivo ou não. A verificação deve ser feita através de um método que receba um valor (parâmetro de
-entrada) e informe se ele é positivo ou negativo através de um retorno do tipo boolean. Assuma o número
-zero como positivo. Declare como: boolean isPositivo ( double num ).
-Igor Kaue Nardes de Castro 
-*/
-
+[POO-006] Crie um programa que solicite ao usu�rio dois n�meros inteiros. Atrav�s de um m�todo, que
+receba esses 2 n�meros como par�metros de entrada, verifique e retorne o maior dos dois valores.
+Igor Kaue Nardes de Castro
+ */
 package lista02;
 
 import java.util.Scanner;
+//import java.util.Random;
 
 public class Exercicio01 {
 
-	static Scanner scan;
+    static Scanner scan;
 
     public static void main(String[] args) {
 
         scan = new Scanner(System.in);
-        int op = 0;        
+        int opExit = 0;
         String preEscolha;
 
         do {
 
             try {
 
-                System.out.print("Digite um valor para verificar: ");
-                preEscolha =scan.next();
-                //double valEscolhido = Double.parseDouble(preEscolha);
-                System.out.println(isPositivo(Double.parseDouble(preEscolha)) ? "Valor positivo!" : "Valor negativo!");
+                System.out.println("-Verifique o maior");
+                
+                System.out.print("\nValor um: ");
+                preEscolha = scan.next();
+                int valTestUm = Integer.parseInt(preEscolha);
+                
+                System.out.print("Valor dois: ");
+                preEscolha = scan.next();
+                int valTestDois = Integer.parseInt(preEscolha);
+                
+                System.out.println("\n-Compara��o\n*Maior valor: " + testeMaior(valTestUm, valTestDois));
 
                 //menu para sair
                 System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
                 preEscolha = scan.next();
-                op = Integer.parseInt(preEscolha);
+                opExit = Integer.parseInt(preEscolha);
 
-            }catch(Exception e){System.err.print(e);}
+            }catch(Exception e){System.out.println("\nerro: " + e);}
 
-        }while(op != 1);
+        }while(opExit != 1);
 
         System.out.print("Fim!");
         scan.close();
-    }   
-   
-    static boolean isPositivo(double num) {    	
-    	return (num < 0) ? false : true;
+    }        
+    
+    static int testeMaior(int valUm, int valDois){
+        return ((valUm >= valDois) ? valUm : valDois);
     }
-
 }

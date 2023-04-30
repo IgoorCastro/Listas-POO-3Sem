@@ -1,100 +1,61 @@
 /*
-4) Escreva um programa em Java para ler uma matriz D de dimensão N x M,
-onde N e M não poderem ser menores que um. Gerar os elementos
-aleatoriamente. O usuário deve informar a dimensão (linha e coluna) e um
-valor máximo para elementos aleatórios. O programa efetuar todas as
-validações. Lembre-se de aproveitar os recursos da linguagem Java para
-facilitar as validações.
-Igor Kaue Nardes de Castro - 3° ADS
+[POO-004] Escreva um programa que solicite 3 (três) valores double e calcule a Equação do Segundo
+Grau. O primeiro valor será o ‘a’, o segundo o ‘b’ e o último o ‘c’. Crie um método que receba três valores,
+'a', 'b' e 'c', que são os coeficientes da equação do segundo grau e retorne o valor do delta, que é dado por
+'b² - 4ac'.
+Igor Kaue Nardes de Castro 
 */
 
 package lista01;
+
 import java.util.Scanner;
-import java.util.Random;
 
 public class Exercicio04 {
-    
-    static int d[][], valMaxRnd, n, m;//n, m = dimensão da matriz    
-    static Scanner scan;
-    
+
+	static Scanner scan;
+
     public static void main(String[] args) {
-        
-        int op = 0;
+
         scan = new Scanner(System.in);
-        
-        
-        
+        int op = 0;
+        double eqA = 0, eqB = 0, eqC = 0;//valor a, b e c
+        String preEscolha;
+
         do {
-			
+
             try {
-				
-		System.out.print("Crie sua matriz.\nDimensoes nao podem ser menor que 1!\n");
-                pegarDimensao();
-                pegarValMax();
-                gerarMatriz();
-                lerMatriz();
-				
-		//menu para sair
-		System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
-		String preEscolha = scan.next();
-		op = Integer.parseInt(preEscolha);
-				
-		}catch(Exception e){System.out.print("***ERRO: Valor deve ser inteiro!\n\n");}
-			
-            }while(op != 1);
-		
-            System.out.print("Fim!");
-        
-        
-    }
-    
-    static void pegarDimensao(){
-        
-        do{
-            
-            try{
-                
-                System.out.print("Valor de linhas: ");
-                String preEscolha = scan.next();
-                n = Integer.parseInt(preEscolha);
-                System.out.print("Valor de colunas: ");
+
+                System.out.print("Valor de a: ");
                 preEscolha = scan.next();
-                m = Integer.parseInt(preEscolha);
-                //System.out.println("-pegarDimensao() = n: " + n + ", m: " + m);
-                System.out.print((n < 1 | m < 1) ? "Valor deve ser maior que 0!\n\n" : "");
-        
-            }catch(Exception e){}
-            
-        }while(n < 1 | m < 1);
-        
+                eqA = Double.parseDouble(preEscolha);
+                
+                System.out.print("Valor de b: ");
+                preEscolha = scan.next();
+                eqB = Double.parseDouble(preEscolha);
+                
+                System.out.print("Valor de c: ");
+                preEscolha = scan.next();
+                eqC = Double.parseDouble(preEscolha);
+                
+                System.out.println("Delta é " + equacaoSegundoGrauDelta(eqA, eqB, eqC));
+
+                //menu para sair
+                System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
+                preEscolha = scan.next();
+                op = Integer.parseInt(preEscolha);
+
+            }catch(Exception e){System.err.print(e);}
+
+        }while(op != 1);
+
+        System.out.print("Fim!");
+        scan.close();
     }
     
-    static void pegarValMax(){
+    static double equacaoSegundoGrauDelta(double a, double b, double c){
         
-        System.out.print("\nValor máximo para elementos aleatórios: ");
-        String preEscolha = scan.next();
-        valMaxRnd = Integer.parseInt(preEscolha);
-        
+        //calculo delta
+        return Math.pow(b, 2) - (4 * a * c);        
     }
-    
-    static void gerarMatriz(){
-        
-        Random rnd = new Random();
-        
-        d = new int[n][m];
-        for(int i = 0; i < n - 1; i++){
-            for(int j = 0; j < m - 1; j++)
-                d[i][j] = rnd.nextInt(valMaxRnd + 1);                
-            }
-        
-    }
-    
-    static void lerMatriz(){
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++)
-                System.out.print((j == 0) ? d[i][j] : "\t" + d[i][j] + " "); 
-            System.out.println("");
-        }
-        
-    }
+
 }

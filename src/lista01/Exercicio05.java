@@ -1,197 +1,72 @@
 /*
-5) Escreva um programa em Java para ler 2 matrizes N x M (definido pelo usuário) e
-calcular a soma entre elas gerando uma terceira matriz.
-Igor Kaue Nardes de Castro - 3° ADS
+) [POO-005] Baseado no exercício anterior, crie uma nova versão, que calcula as raízes de uma equação do
+segundo grau: ax² + bx + c = 0. Para ela existir, o coeficiente 'a' deve ser diferente de zero. Caso o delta seja
+maior ou igual a zero, as raízes serão reais. Caso o delta seja negativo, as reais serão complexas e da forma,
+assim retorne zero.
+Igor Kaue Nardes de Castro
  */
-
 package lista01;
 
 import java.util.Scanner;
-import java.util.Random;
 
 public class Exercicio05 {
-	
-	static int mtzA[][], mtzB[][], mtzSoma[][], lin = 0, col = 0, valMaxRnd;
-	static Scanner scan;
-	static Random rnd;
 
-	public static void main(String[] args) {
-		
-		scan = new Scanner(System.in);
-		int op = 0;//programa deve funcionar enquanto op != 1
-		String preEscolha = "";
-		
-		do {
-			
-			try {
-				
-				System.out.println("\n--- Defina duas matrizes e receba a soma entre as duas! ---");
-				setInformacoes();				
-				setRandom(); 
-                System.out.println("Chegouss");
-				lerMatriz();
-				
-				//menu para sair
-				System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
-				preEscolha = scan.next();
-				op = Integer.parseInt(preEscolha);
-				
-			}catch(Exception e){
-				System.out.print((preEscolha != "1") ? "\n\n**Continuando\n\n": "***ERRO: Por favor, usar apenas valores inteiros maior que 0!\\\\n\\\\n");
-			}
-			
-		}while(op != 1);
-		
-		System.out.print("Fim!");
+    static Scanner scan;
 
-	}
-	
-	static void somarMatriz() {
-		
-		if(mtzA[0].length > mtzB[0].length) {
-			
-			for(int i = 0; i < mtzSoma.length; i++) {
-				for(int t = 0; t < mtzSoma[i].length; t++) {
-					
-					if(t < mtzB[t].length) 
-						mtzSoma[i][t] = mtzA[i][t] + mtzB[i][t];
-					else
-						mtzSoma[i][t] = mtzA[i][t];
-				}
-			}
-		}
-	}
-		
-	static void setInformacoes() {
-		
-		String preEscolha;
-		
-		do{
-            
-            try{
+    public static void main(String[] args) {
+
+        scan = new Scanner(System.in);
+        int op = 0;
+        double eqA = 0, eqB = 0, eqC = 0;//valor a, b e c
+        String preEscolha;
+
+        do {
+
+            try {
             	
-            	for(int i = 0; i < 2; i++) {
-            	
-	                System.out.print((i == 0) ? "\nMatriz A\nValor de linhas: " : "\nMatriz B\nValor de linhas: ");
-	                preEscolha = scan.next();
-	                lin = Integer.parseInt(preEscolha);
-	                System.out.print("Valor de colunas: ");
-	                preEscolha = scan.next();
-	                col = Integer.parseInt(preEscolha);
-	                
-                	if (i == 0)
-                		mtzA = new int[lin][col];
-                	else
-                		mtzB = new int[lin][col];
+            	do {
+            		System.out.print("Valor de a: ");
+                    preEscolha = scan.next();
+                    eqA = Double.parseDouble(preEscolha);
+                    System.out.print((eqA == 0) ? "\nerro: Valor deve ser diferente de 0!\n" : "");
+            	}while(eqA == 0);
                 
-            	}	
-            	
-            	if(mtzA.length > mtzB.length)//lin
-            		lin = mtzA.length;
-            	else
-            		lin = mtzB.length;                	
-            	mtzSoma = new int[lin][];
-            	
-            	//--
-            	
-            	if(mtzA.length > mtzB.length ) {
-            		
-            		if(mtzA[0].length > mtzB[0].length) {
-            			
-            			for(int i = 0; i < mtzA.length; i++)             				
-            				mtzSoma[i] = new int [mtzA[i].length];
-                		
-            		}else{
-            			
-            			for(int i = 0; i < mtzA.length; i++) {
-                			
-            				if(i < mtzB.length) 
-            					mtzSoma[i] = new int [mtzB[i].length];  
-            				else 
-            					mtzSoma[i] = new int [mtzA[i].length];    
-                		} 
-            		}
-            	}else {
-            		
-            		if(mtzA[0].length > mtzB[0].length) {
-            			
-            			for(int i = 0; i < mtzB.length; i++) {
-                			
-            				if(i < mtzA.length)
-                				mtzSoma[i] = new int [mtzA[i].length]; 
-            				else
-            					mtzSoma[i] = new int [mtzB[i].length];
-                		}
-            		}else {
-            			
-            			for(int i = 0; i < mtzB.length; i++) 
-            				mtzSoma[i] = new int[mtzB[i].length];            			
-            		}
-            		
-            	}            	
-            	            	
-            	System.out.print("\nValor máximo para elementos aleatórios: ");
-   		     	preEscolha = scan.next();
-   		     	valMaxRnd = Integer.parseInt(preEscolha);
-   		     	
-                System.out.print((lin < 1 | col < 1 | valMaxRnd < 1) ? "***ERRO: Valor deve ser maior que 0!\n\n" : "");
                 
-            }catch(Exception e){
-            	System.out.print("***ERRO: Valor deve ser um número inteiro maior que 0!\n\n e: " + e);
-            }
-            
-        }while(lin < 1 | col < 1 | valMaxRnd < 1);
-		
-	}
-	
-	static void setRandom() {
-		
-		rnd = new Random();		
-		
-		
-		for(int i = 0; i < mtzA.length; i++) {
-			
-			for(int x = 0; x < mtzA[i].length; x++) {				
-				mtzA[i][x] = rnd.nextInt(valMaxRnd + 1);
-				mtzSoma[i][x] = mtzA[i][x];//reseta os valores
-			}
-		}
-		
-		for(int i = 0; i < mtzB.length; i++) {
-			
-			for(int x = 0; x < mtzB[i].length; x++){
-				mtzB[i][x] = rnd.nextInt(valMaxRnd + 1);
-				mtzSoma[i][x] += mtzB[i][x];
-			}
-			
-		}
-	}
-	
-	static void lerMatriz() {
-				
-		System.out.print("\n\t---- Matrizes geradas -----\n");
-		
-		System.out.print("\nMatriz A\n");
-		for(int i = 0; i < mtzA.length; i++) {
-			for(int x = 0; x < mtzA[i].length; x++) 				
-				System.out.print((x == 0) ? mtzA[i][x] : "\t" + mtzA[i][x]);
-			System.out.println();			
-		}
-		
-		System.out.print("\nMatriz B\n");		
-		for(int i = 0; i < mtzB.length; i++) {
-			for(int x = 0; x < mtzB[i].length; x++)
-				System.out.print((x == 0) ? mtzB[i][x] : "\t" + mtzB[i][x]);
-			System.out.println();
-		}
-		
-		System.out.print("\n-Soma das matrizes\n");		
-		for(int i = 0; i < mtzSoma.length; i++) {
-			for(int x = 0; x < mtzSoma[i].length; x++)
-				System.out.print((x == 0) ? mtzSoma[i][x] : "\t" + mtzSoma[i][x]);
-			System.out.println();
-		}
-		
-	}
+                System.out.print("Valor de b: ");
+                preEscolha = scan.next();
+                eqB = Double.parseDouble(preEscolha);
+                
+                System.out.print("Valor de c: ");
+                preEscolha = scan.next();
+                eqC = Double.parseDouble(preEscolha);
+                
+                System.out.println(equacaoSegundoGrau(eqA, eqB, eqC));
 
+                //menu para sair
+                System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
+                preEscolha = scan.next();
+                op = Integer.parseInt(preEscolha);
+
+            }catch(Exception e){System.err.print(e);}
+
+        }while(op != 1);
+
+        System.out.print("Fim!");
+        scan.close();
+    }
+    
+    static String equacaoSegundoGrau(double a, double b, double c){
+        
+        //calculo delta
+        double delta =  Math.pow(b, 2) - (4 * a * c);
+        
+        if(delta < 0)
+        	return "0";
+        
+        //calculo da raizes
+    	double x1 = ((-1 * b) + Math.sqrt(delta)) / 2 * a;
+        double x2 = ((-1 * b) - Math.sqrt(delta)) / 2 * a;
+        return "-Raizes\nx1: " + x1 + " - x2: " + x2;
+    }
+        
 }

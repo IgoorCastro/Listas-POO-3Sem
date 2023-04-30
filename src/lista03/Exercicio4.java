@@ -1,53 +1,79 @@
 /*
-[POO-009] Crie um programa que solicite ao usuário dois números inteiros. Através de um método, que
-receba esses 2 números como parâmetros de entrada, verifique e retorne o menor dos dois valores.
+[POO-017] Um professor, muito legal, fez 3 provas durante um semestre, mas só vai levar em conta as
+duas notas mais altas para calcular a média. Crie um programa que solicite ao usuário o valor double das 3
+notas, mostre como seria a média com essas 3 provas, a média com as 2 notas mais altas, bem como a nota
+mais alta e a nota mais baixa. Tente criar apenas um método para retornar essas médias. Este método
+deverá receber as 3 notas como parâmetros de entrada e retornar os valores solicitados. As notas devem
+ser de zero a dez e qualquer valor diferente deverá ser desconsiderado, assumindo zero.
 Igor Kaue Nardes de Castro
  */
 package lista03;
 
 import java.util.Scanner;
-//import java.util.Random;
+import java.util.Arrays;
 
 public class Exercicio4 {
 
     static Scanner scan;
+    
 
     public static void main(String[] args) {
 
-        scan = new Scanner(System.in);
-        int opExit = 0;
-        String preEscolha;
+            scan = new Scanner(System.in);
+            int op = 0;
+            String preEscolha;
+            double[] notas = new double[3];
 
-        do {
+            do {
+                try {
+                    System.out.println("-- Calculo de média --");
+                    imprimirRegra();
+                    System.out.println();
+                    
+                    for(int i = 0; i < 3; i++){
+                        do{
+                            System.out.print("Entre com a nota [" + (i + 1) + "]: ");
+                            preEscolha = scan.next();
+                            notas[i] = Double.parseDouble(preEscolha);
+                            if(notas[i] < 0 || notas[i] > 10)
+                                imprimirRegra();
+                        }while(notas[i] < 0 || notas[i] > 10);                        
+                    }
+                    
+                    double[] resultado = calculoMedia(notas);
+                    
+                    System.out.print("\n--Médias--");
+                    System.out.println( "\nMédia maiores: " + resultado[0] +
+                                        "\nMédia aritmética: " + resultado[1] +
+                                        "\nMaior nota: " + resultado[2] +
+                                        "\nMenor nota: " + resultado[3]);
 
-            try {
+                    //menu para sair
+                    System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
+                    preEscolha = scan.next();
+                    op = Integer.parseInt(preEscolha);
 
-                System.out.println("-Verifique o maior");
-                
-                System.out.print("\nValor um: ");
-                preEscolha = scan.next();
-                int valTestUm = Integer.parseInt(preEscolha);
-                
-                System.out.print("Valor dois: ");
-                preEscolha = scan.next();
-                int valTestDois = Integer.parseInt(preEscolha);
-                
-                System.out.println("\n-Compara��o\n*Maior valor: " + testeMenor(valTestUm, valTestDois));
+                }catch(Exception e){System.err.print(e);}
 
-                //menu para sair
-                System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
-                preEscolha = scan.next();
-                opExit = Integer.parseInt(preEscolha);
+            }while(op != 1);
 
-            }catch(Exception e){System.out.println("\nerro: " + e);}
-
-        }while(opExit != 1);
-
-        System.out.print("Fim!");
-        scan.close();
-    }        
+            System.out.print("Fim!");
+            scan.close();
+    }
     
-    static int testeMenor(int valUm, int valDois){
-        return Math.min(valUm, valDois);
+    static double[] calculoMedia(double[] notas){  
+        Arrays.sort(notas);//ordena as notas, as duas primeiras sao as maiores!     
+        double[] results = new double[4];
+        
+        results[0] = (notas[1] + notas[2]) / 2;//média maior
+        results[1] = (notas[0] + notas[1] + notas[2]) / 3;//média aritimética
+        results[2] = notas[2];//maior nota
+        results[3] = notas[0];
+        
+        return results;
+    }
+    
+    static void imprimirRegra(){
+        System.err.println("-Valores de 0 a 10!");
     }
 }
