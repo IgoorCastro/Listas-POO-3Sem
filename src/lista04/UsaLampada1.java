@@ -30,12 +30,16 @@ public class UsaLampada1 {
 		lmpd.setTipo(aux);
 		
 		do {			
-			System.out.print("\n[1] ligar - [2] desligar - [0] sair: ");
-			op = scan.nextInt();
-			lmpd.setLigada((op == 1) ? true : false);
+			do {
+				System.out.print("\n[1] ligar - [2] desligar - [0] desligar e sair: ");
+				op = scan.nextInt();
+			}while(op < 0 | op > 2);
+			lmpd.setLigada((op == 1 && op > 0) ? true : false);
 			
 			System.out.println("Marca: " + lmpd.getMarca() + "\nModelo: " + lmpd.getModelo() + "\nTipo: " + lmpd.getTipo() + "\nStatus: " + ((lmpd.isLigada()) ? "Ligada" : "Desligada"));
 		}while(op != 0);
+		
+		System.err.print("você saiu..");
 		
 		scan.close();
 	}

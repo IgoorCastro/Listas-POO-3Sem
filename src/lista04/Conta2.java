@@ -1,3 +1,12 @@
+/*
+2) Imagine o problema de sair com os amigos para uma refeição em um restaurante e ao final ter que
+dividir a conta para cada pessoa. Outra coisa importante, os 10% do garçom é opcional. Criar uma classe
+para solucionar o problema proposto, onde tem o valor da conta a ser paga (sem os 10% do garçom), a
+quantidade de pessoas que dividirão essa conta e se vai ser pago os 10% do garçom, sim ou não. Valide os
+dados inseridos não permitindo absurdos.
+Igor Kaue Nardes de Castro
+ */
+
 package lista04;
 
 public class Conta2 {
@@ -57,6 +66,6 @@ public class Conta2 {
 	}
 	
 	public void resumoConta() {
-		System.out.println("- Resumo da compra -\nValor: " + valor + "\nTotal pago: " + valPago + "\nTroco: " + troco);
+		System.out.println("\n\n- Resumo da compra -\nValor: " + valor + "\nTotal pago: " + valPago + "\nTroco: " + troco + "\nStatus da compra: " + ((pagou) ? "Pago com sucesso." : "Não finalizada."));
 	}
 }

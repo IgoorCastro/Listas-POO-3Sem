@@ -30,7 +30,5 @@ public class Lampada1 {
 		this.ligada = ligada;
 	}
 	
-	public boolean estado() {		
-		return (ligada == true) ? true : false;
-	}
+	
 }
