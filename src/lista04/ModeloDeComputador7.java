@@ -7,7 +7,6 @@ Igor Kaue Nardes de Castro
  */
 package lista04;
 
-import java.util.Arrays;
 
 public class ModeloDeComputador7 {
 
