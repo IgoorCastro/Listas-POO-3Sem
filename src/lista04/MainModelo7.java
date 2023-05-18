@@ -1,9 +1,9 @@
 package lista04;
 
-import java.util.Arrays;
+
 import java.util.Scanner;
 
-public class UsaModelo7 {
+public class MainModelo7 {
 	
 	static Scanner scan;
     
@@ -36,7 +36,7 @@ public class UsaModelo7 {
         
         ModeloDeComputador7 modelo1 = new ModeloDeComputador7();
         scan = new Scanner(System.in);
-        int op = 0, vetOp[] = new int[5];
+        int op = 0;
         byte cont = 0;
         boolean motor = false;
         

@@ -2,7 +2,7 @@ package lista04;
 
 import java.util.Scanner;
 
-public class UsaData4 {
+public class MainData4 {
 	
 	static Scanner scan = new Scanner(System.in);
 	

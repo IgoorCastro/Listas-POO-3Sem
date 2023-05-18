@@ -9,7 +9,8 @@ public class Copie {
 	public static void main(String[] args) {
 
 		scan = new Scanner(System.in);
-		int op = 0;
+		boolean quitOption = false;
+		String preEscolha = "";
 		
 		do {
 			
@@ -19,14 +20,14 @@ public class Copie {
 				
 				//menu para sair
 				System.out.printf("\nDigite '1' para sair ou outro valor para continuar: ");
-				String preEscolha = scan.next();
-				op = Integer.parseInt(preEscolha);
+				preEscolha = scan.next();
+				quitOption = (Integer.parseInt(preEscolha) == 1) ? true : false;
 				
-			}catch(Exception e){}
+			}catch(Exception e){/*System.err.println("\n\ne: " + e);*/}
 			
-		}while(op != 1);
+		}while(quitOption != true);
 		
-		System.out.print("Fim!");
+		System.out.print("\nFim!");
 		scan.close();
 	}
 

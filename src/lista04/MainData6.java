@@ -1,6 +1,6 @@
 package lista04;
 
-public class UsaData6 {
+public class MainData6 {
 
 	public static void main(String[] args) {
 		Data6 data1 = new Data6((byte) 1,(byte) 1, 2022);

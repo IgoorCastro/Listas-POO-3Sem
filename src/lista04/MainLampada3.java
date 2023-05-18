@@ -4,7 +4,7 @@ Igor Kaue Nardes de Castro
  */
 package lista04;
 import java.util.Scanner;
-public class UsaLampada3 {
+public class MainLampada3 {
 
 	public static void main(String[] args) {
 		Lampada3 lmpd = new Lampada3();

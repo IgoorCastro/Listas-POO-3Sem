@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Scanner;
 
-public class UsaEquacao5 {
+public class MainEquacao5 {
 	
 	static Scanner scan;
 	
