@@ -14,4 +14,19 @@ public class Contrato extends Vaga{
 		temporario = false;
 	}
 
+	public boolean isTemporario() {
+		return temporario;
+	}
+
+	public void setTemporario(boolean temporario) {
+		this.temporario = temporario;
+	}
+	
+	@Override
+	public String toString() {
+		return "\nDescrição: " + getDescricao() +
+				"\nSálario: " + getSalario() + " R$" +
+				"\nTemporario: " + ( isTemporario() ? "Sim" : "Não");
+	}
+
 }

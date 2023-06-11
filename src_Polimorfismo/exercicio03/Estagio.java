@@ -13,4 +13,20 @@ public class Estagio extends Vaga{
 		
 		meses = 0;
 	}
+
+	public int getMeses() {
+		return meses;
+	}
+
+	public void setMeses(int meses) {
+		this.meses = meses;
+	}
+	
+	@Override
+	public String toString() {
+		return "\nDescrição: " + getDescricao() +
+				"\nSálario: " + getSalario() + " R$" +
+				"\nMeses: " + getMeses();
+	}
+
 }
