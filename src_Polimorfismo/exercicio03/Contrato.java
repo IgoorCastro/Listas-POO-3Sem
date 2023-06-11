@@ -24,7 +24,8 @@ public class Contrato extends Vaga{
 	
 	@Override
 	public String toString() {
-		return "\nDescrição: " + getDescricao() +
+		return 	"\nTipo: Contrato" +
+				"\nDescrição: " + getDescricao() +
 				"\nSálario: " + getSalario() + " R$" +
 				"\nTemporario: " + ( isTemporario() ? "Sim" : "Não");
 	}

@@ -24,7 +24,8 @@ public class Estagio extends Vaga{
 	
 	@Override
 	public String toString() {
-		return "\nDescrição: " + getDescricao() +
+		return 	"\nTipo: Estágio" +
+				"\nDescrição: " + getDescricao() +
 				"\nSálario: " + getSalario() + " R$" +
 				"\nMeses: " + getMeses();
 	}

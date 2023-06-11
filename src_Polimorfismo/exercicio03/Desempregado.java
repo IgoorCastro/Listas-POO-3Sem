@@ -25,8 +25,9 @@ public class Desempregado extends Candidato{
 	
 	@Override
 	public String toString() {
-		return "Nome: " + getNome() +
-				"Idade: " + getIdade() +
-				"Tempo desempregado: " + getTempoDesempregado();
+		return 	"\nSituação: Desempregado" +
+				"\nNome: " + getNome() +
+				"\nIdade: " + getIdade() +
+				"\nTempo desempregado: " + getTempoDesempregado();
 	}
 }

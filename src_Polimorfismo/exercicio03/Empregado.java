@@ -25,8 +25,9 @@ public class Empregado extends Candidato{
 	
 	@Override
 	public String toString() {
-		return "Nome: " + getNome() +
-				"Idade: " + getIdade() +
-				"Empresa atual: " + getNomeEmpresaAtual();
+		return 	"\nSituação: Empregado" +
+				"\nNome: " + getNome() +
+				"\nIdade: " + getIdade() +
+				"\nEmpresa atual: " + getNomeEmpresaAtual();
 	}
 }

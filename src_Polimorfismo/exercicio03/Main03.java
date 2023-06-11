@@ -60,6 +60,7 @@ public class Main03 {
 						break;
 					case 3:
 						cadastroCandidatoVaga();
+						break;
 					case 4:
 						listaVagaPorTipo();
 						break;
@@ -76,42 +77,94 @@ public class Main03 {
 	static void cadastroCandidatoVaga() {
 		
 		int vagaNum = 0, candNum = 0;
+		boolean confkey = false;
 		
-		System.out.println("-CADASTRAR CANDIDATO EM VAGA-");
-		
-		//INFORMAÇÕES DA VAGA
-		do {	
-			scan = new Scanner(System.in);
+		do {
+			System.out.println("-CADASTRAR CANDIDATO EM VAGA-");
 			
-			for(int i = 0; i < contVagas; i++) {
-				if(vagas[i] != null) 
-					System.out.println("[" + (i + 1) + "]  " + vagas[i]);// VAGA 1 = VAGAS[0]
+			//INFORMAÇÕES DA VAGA
+			do {	
+				System.out.println("\n=VAGAS=");
+				do {
+					scan = new Scanner(System.in);
+					
+					for(int i = 0; i < contVagas; i++) {
+						if(vagas[i] != null) 
+							System.out.println("[" + (i + 1) + "]  " + vagas[i]);// VAGA 1 = VAGAS[0]
+						System.out.println("----------------------");
+					}
+					
+					System.out.print("-Digite o numero da vaga: ");
+					vagaNum = scan.nextInt();
+					
+					if(vagaNum < 1 || vagaNum > contVagas)
+						System.out.println("erro: Valor invalido!\n");
+				}while(vagaNum < 1 || vagaNum > contVagas);
+				
+				//LOG ----------------
 				System.out.println("----------------------");
-			}
+				System.out.println("\nVaga selecionada: \n" + vagas[vagaNum - 1]);
+				System.out.println("----------------------");
+				//--------------------
+				
+				System.out.print("-Confirmar seleção [S/N]: ");
+				confkey = scan.next().equalsIgnoreCase("s");
+			}while(!confkey);
 			
-			System.out.print("Digite o valor da vaga: ");
-			vagaNum = scan.nextInt();
-		}while(vagaNum < 1 || vagaNum > contVagas);
-		
-		//LOG
-		System.out.println("Vaga selecionada: \n" + vagas[vagaNum]);
-		//////////////////////////////
-		
-		
-		//INFORMAÇÕES DO CANDIDATO		
-		scan = new Scanner(System.in);
-		
-		for(int i = 0; i < contCandidatos; i++) {
-			if(candidatos[i] != null) 
-				System.out.println("[" + (i + 1) + "] - " + candidatos[i]);// CANDIDATO 1 = CANDIDATO[0]
-		}
-		
-		System.out.print("Candidato: ");
-		candNum = scan.nextInt();
-		
-		//LOG
-		System.out.println("Candidato selecionado: \n" + candidatos[vagaNum]);
-		//////////////////////////////
+			
+			//////////////////////////////
+			
+			
+			//INFORMAÇÕES DO CANDIDATO		
+			do {	
+				System.out.println("\n=CANDIDATOS=");
+				do {
+					scan = new Scanner(System.in);
+					
+					for(int i = 0; i < contCandidatos; i++) {
+						if(candidatos[i] != null) 
+							System.out.println("[" + (i + 1) + "]  " + candidatos[i]);// VAGA 1 = VAGAS[0]
+						System.out.println("----------------------");
+					}
+					
+					System.out.print("-Digite o numero do candidato: ");
+					candNum = scan.nextInt();
+					
+					if(candNum < 1 || candNum > contCandidatos)
+						System.out.println("erro: Valor invalido!\n");
+				}while(candNum < 1 || candNum > contCandidatos);
+				
+				//LOG ----------------
+				System.out.println("----------------------");
+				System.out.println("\nCandidato(a) selecionado(a): \n" + candidatos[candNum - 1]);
+				System.out.println("----------------------");
+				//--------------------
+				
+				System.out.print("-Confirmar seleção [S/N]: ");
+				confkey = scan.next().equalsIgnoreCase("s");
+			}while(!confkey);
+			
+			
+			//INSERIR CANDIDATO NA VAGA
+			System.out.println("\n=RESUMO DA CANDIDATURA=");
+			System.out.println("----------------------");
+			System.out.println("-Vaga Selecionada-\n" + vagas[vagaNum - 1]);
+			System.out.println("----------------------");
+			
+			System.out.println("-Candidato(a) selecionado(a)- \n" + candidatos[candNum - 1]);
+			System.out.println("----------------------");
+			
+			System.out.print("-Confirmar candidatura [S/N]: ");
+			confkey = scan.next().equalsIgnoreCase("s");
+			
+			System.out.println();
+			
+			if(confkey) 
+				vagas[vagaNum - 1].addCandidatos(candidatos[candNum - 1]);
+			
+			System.out.println();
+			
+		}while(!confkey);
 	}
 	
 	static void nmrCandidatosSituacao() {
