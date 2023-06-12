@@ -9,11 +9,13 @@ public class Candidato {
 
 	private String nome;
 	private int idade;
+	private boolean concorrendo;
 	
 	public Candidato() {	
 		
 		nome = "Sem nome";
 		idade = 0;
+		concorrendo = false;
 	}
 
 	public String getNome() {
@@ -32,6 +34,15 @@ public class Candidato {
 		this.idade = idade;
 	}
 	
+	
+	public boolean isConcorrendo() {
+		return concorrendo;
+	}
+
+	public void setConcorrendo(boolean concorrendo) {
+		this.concorrendo = concorrendo;
+	}
+
 	
 	@Override
 	public String toString() {

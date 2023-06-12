@@ -44,12 +44,24 @@ public class Vaga {
 		this.candidatos = candidatos;
 	}
 	
+	public String getCandidatosCadastrados() {
+		String ret = "";
+		if(candidatos.length != 0) {
+			for(int i = 0; i < candidatos.length; i++) {
+				if(candidatos[i] != null)
+					ret += candidatos[i].getNome() + "\n";
+			}
+		}else
+			return "Não há candidatos cadastrados nessa vaga.";
+		
+		return ret;			
+	}
+	
 	public void addCandidatos(Candidato candidato) {
-		
-		
 		
 		if(candidato != null) {
 			candidatos[contCadidato] = candidato;
+			candidato.setConcorrendo(true);
 			System.out.println("Candidato adicionado com sucesso!");
 			
 			//LOG
@@ -63,7 +75,5 @@ public class Vaga {
 		}
 		else
 			System.out.println("Candidato não adicionado!");
-		
-		
 	}
 }

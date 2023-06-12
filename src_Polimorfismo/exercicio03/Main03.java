@@ -51,7 +51,9 @@ public class Main03 {
 				}while(Integer.parseInt(preEscolha) < 0 || Integer.parseInt(preEscolha) > 6);
 				
 				switch(Integer.parseInt(preEscolha)){
-					
+					case 0:
+						quitOption = true;
+						break;
 					case 1:
 						cadastroVaga();
 						break;
@@ -59,11 +61,30 @@ public class Main03 {
 						cadastroCandidato();
 						break;
 					case 3:
-						cadastroCandidatoVaga();
+						if(contCandidatos > 0 && contVagas > 0) 
+							cadastroCandidatoVaga();
+						else
+							System.out.println("erro: Número de candidatos ou vagas é igual a 0!\n");						
 						break;
 					case 4:
-						listaVagaPorTipo();
+						if(contVagas != 0)
+							listaVagaPorTipo();
+						else
+							System.out.println("erro: Não há vaga cadastrada!\n");	
 						break;
+					case 5:
+						if(contCandidatos > 0 && contVagas > 0) 
+							qntCandtSituacao();
+						else
+							System.out.println("erro: Número de candidatos ou vagas é igual a 0!\n");
+						break;
+					case 6:
+						if(contCandidatos > 0 && contVagas > 0) 
+							candidatoXvaga();
+						else
+							System.out.println("erro: Número de candidatos ou vagas é igual a 0!\n");
+						break;
+						
 				}				
 				
 			}catch(Exception e){System.err.println("\nERRO: Porfavor, digite um valor valido! [Não entre com uma letra ou caractere especial!]\n");}
@@ -72,6 +93,46 @@ public class Main03 {
 		
 		System.out.print("\nFim!");
 		scan.close();
+	}
+	
+	////////////////////CADIDATOS x VAGA
+	static void candidatoXvaga() {
+		
+		System.out.println("-CANDIDATOS X VAGA-\n");
+		
+		for(int i = 0; i < contVagas; i++) {
+			if(vagas[i] != null && vagas[i].getCandidatos() != null) {//VER SE O INDICE NÃO ESTÁ VAZIO
+				System.out.println("----------------------");
+				System.out.println(	"Descrição da vaga: " + vagas[i].getDescricao() +
+									"\nCandidatos" + vagas[i].getCandidatosCadastrados());	
+				System.out.println("----------------------\n");
+			}
+		}
+	}
+	
+	/////////////////////CONTADOR DE CANDIDATOS REGISTRADOS EM VAGAS
+	static int contRegVaga() {
+		
+		int cont = 0;		
+		for(int i = 0; i < contCandidatos; i++) {
+			if(candidatos[i] != null) {//VER SE O INDICE NÃO ESTÁ VAZIO
+				if(candidatos[i].isConcorrendo())
+					cont++;
+			}
+		}
+		return cont;
+	}
+	
+	/////////////////////QUANTIDADE DE CANDIDATOS E SITUAÇÃO
+	static void qntCandtSituacao() {
+		System.out.println("-QUANTIDADE DE CANDIDATOS E SITUAÇÃO-");
+		
+		
+		
+		System.out.println(	"Quantidade de candidatos: " + contCandidatos +
+							"\nRegistrado(s) em vaga(s): " + contRegVaga());
+		
+		System.out.println();
 	}
 	
 	static void cadastroCandidatoVaga() {
@@ -204,35 +265,37 @@ public class Main03 {
 		
 		String aux = "0";
 		
-		System.out.println("\n--LISTA DE VAGA(S) POR TIPO--");
-		
-		do {
-			scan = new Scanner(System.in);
+		do {				
+			System.out.println("\n--LISTA DE VAGA(S) POR TIPO--");
 			
-			System.out.println("  ↓  Escolha uma opção\n" +
-					   			" [1] - Vagas por contrato\n" +
-					   			" [2] - Vagas de estágio\n" +
-					   			" [0] - Voltar\n");
-			System.out.print("→ ");
-			aux = scan.next();
+			do {
+				scan = new Scanner(System.in);
+				
+				System.out.println("  ↓  Escolha uma opção\n" +
+						   			" [1] - Vagas por contrato\n" +
+						   			" [2] - Vagas de estágio\n" +
+						   			" [0] - Voltar\n");
+				System.out.print("→ ");
+				aux = scan.next();
+				
+				if(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2)
+					System.out.println("erro: Valor invalido!\n");			
+				
+			}while(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2);
 			
-			if(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2)
-				System.out.println("erro: Valor invalido!\n");			
-			
-		}while(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2);
-		
-		switch(Integer.parseInt(aux)) {
-			case 0:
-				return;
-			case 1:
-				listaVagaContrato();
-				break;
-			case 2:
-				listaVagaEstagio();
-				break;
-			default:
-				System.out.println("erro: Valor invalido!");	
-		}
+			switch(Integer.parseInt(aux)) {
+				case 0:
+					return;
+				case 1:
+					listaVagaContrato();
+					break;
+				case 2:
+					listaVagaEstagio();
+					break;
+				default:
+					System.out.println("erro: Valor invalido!");	
+			}
+		}while(Integer.parseInt(aux) != 0);
 	}
 	
 	
@@ -277,8 +340,10 @@ public class Main03 {
 		
 		candidatos[contCandidatos] = newCandidato;
 		
-		if(newCandidato != null)
+		if(newCandidato != null) {
 			contCandidatos++;
+			System.out.println(" > Candidato registrado com sucesso!");
+		}
 		
 		System.out.println("\n");		
 	}
@@ -322,8 +387,10 @@ public class Main03 {
 		
 		candidatos[contCandidatos] = newCandidato;
 		
-		if(newCandidato != null)
+		if(newCandidato != null) {
 			contCandidatos++;
+			System.out.println(" > Candidato registrado com sucesso!");
+		}
 		
 		System.out.println("\n");		
 	}
@@ -332,36 +399,38 @@ public class Main03 {
 		
 		String aux = "0";
 		
-		System.out.println("\n--CADASTRO DE CANDIDATO--");
-		
 		do {
-			scan = new Scanner(System.in);
+			System.out.println("\n--CADASTRO DE CANDIDATO--");
 			
-			System.out.println("  ↓  Escolha uma opção\n" +
-							   " [1] - Candidato empregado\n" +
-							   " [2] - Candidato desempregado\n" +
-							   " [0] - Voltar\n");
-			System.out.print("→ ");
-			aux = scan.next();
+			do {
+				scan = new Scanner(System.in);
+				
+				System.out.println("  ↓  Escolha uma opção\n" +
+								   " [1] - Candidato empregado\n" +
+								   " [2] - Candidato desempregado\n" +
+								   " [0] - Voltar\n");
+				System.out.print("→ ");
+				aux = scan.next();
+				
+				if(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2)
+					System.out.println("erro: Valor invalido!\n");			
+				
+			}while(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2);
 			
-			if(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2)
-				System.out.println("erro: Valor invalido!\n");			
-			
-		}while(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2);
-		
-		switch(Integer.parseInt(aux)) {
-			case 0:
-				return;
-			case 1:
-				cadastroCandidatoEmpregado();
-				break;
-			case 2:
-				cadastroCandidatoDesempregado();
-				break;
-			default:
-				System.out.println("erro: Valor invalido!");
-					
-		}
+			switch(Integer.parseInt(aux)) {
+				case 0:
+					return;
+				case 1:
+					cadastroCandidatoEmpregado();
+					break;
+				case 2:
+					cadastroCandidatoDesempregado();
+					break;
+				default:
+					System.out.println("erro: Valor invalido!");
+						
+			}
+		}while(!aux.equals("0"));
 	}
 
 	
@@ -405,10 +474,11 @@ public class Main03 {
 		
 		vagas[contVagas] = newVaga;
 		
-		if(newVaga != null)
+		if(newVaga != null) {
 			contVagas++;
-		
-		System.out.println("\n");
+			System.out.println(" > Vaga registrada com sucesso!");
+		}
+		System.out.println();
 	}
 	
 	static void cadastroVagaContrato(){
@@ -450,46 +520,48 @@ public class Main03 {
 		
 		vagas[contVagas] = newVaga;
 		
-		if(newVaga != null)
+		if(newVaga != null) {
 			contVagas++;
-		
-		System.out.println("\n");
+			System.out.println(" > Vaga registrada com sucesso!");
+		}
+		System.out.println();
 	}
 	
 	static void cadastroVaga() {	
 		
 		String aux = "0";
-		
-		System.out.println("\n--CADASTRO DE VAGA--");
-		
-		do {
-			scan = new Scanner(System.in);
+		do {			
+			System.out.println("\n--CADASTRO DE VAGA--");
 			
-			System.out.println("  ↓  Escolha uma opção\n" +
-					   " [1] - Vaga de contrato\n" +
-					   " [2] - Vaga de estágio\n" +
-					   " [0] - Voltar\n");
-			System.out.print("→ ");
-			aux = scan.next();
+			do {
+				scan = new Scanner(System.in);
+				
+				System.out.println("  ↓  Escolha uma opção\n" +
+						   " [1] - Vaga de contrato\n" +
+						   " [2] - Vaga de estágio\n" +
+						   " [0] - Voltar\n");
+				System.out.print("→ ");
+				aux = scan.next();
+				
+				if(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2)
+					System.out.println("erro: Valor invalido!\n");			
+				
+			}while(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2);
 			
-			if(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2)
-				System.out.println("erro: Valor invalido!\n");			
-			
-		}while(Integer.parseInt(aux) < 0 || Integer.parseInt(aux) > 2);
-		
-		switch(Integer.parseInt(aux)) {
-			case 0:
-				return;
-			case 1:
-				cadastroVagaContrato();
-				break;
-			case 2:
-				cadastroVagaEstagio();
-				break;
-			default:
-				System.out.println("erro: Valor invalido!");
-					
-		}
+			switch(Integer.parseInt(aux)) {
+				case 0:
+					return;
+				case 1:
+					cadastroVagaContrato();
+					break;
+				case 2:
+					cadastroVagaEstagio();
+					break;
+				default:
+					System.out.println("erro: Valor invalido!");
+						
+			}
+		}while(!aux.equals("0"));
 	}
 	
 	static void mainMenu() {

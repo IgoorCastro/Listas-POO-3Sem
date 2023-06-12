@@ -19,7 +19,8 @@ public class Estagio extends Vaga{
 	}
 
 	public void setMeses(int meses) {
-		this.meses = meses;
+		if(meses > 0)
+			this.meses = meses;
 	}
 	
 	@Override
